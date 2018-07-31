@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="utf-8" xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>Welcome to SuperMarket!</div>
+    <div>Under following is the products which we could support !<a href="/products/doselectorders">查看购物车</a> </div>
+    <table>
+        <tr>
+            <th>productImgUrl(图片)</th>
+            <th>productId（编号）</th>
+            <th>productName（商品名称）</th>
+            <th>productDesc（商品描述）</th>
+            <th>productPrice（商品价格/元）</th>
+            <th>productResult（商品余量）</th>
+            <th>请选择</th>
+        </tr>
+        <tr th:each="product: ${AllProducts}">
+            <td><img th:src="@{${product.productImgUrl}}" width="100px" height="100px"/></td>
+            <td th:text="${product.productId}">productId</td>
+            <td th:text="${product.productName}">productName</td>
+            <td th:text="${product.productDesc}">productDesc</td>
+            <td th:text="${product.productPrice+'元'}">productPrice</td>
+            <td th:text="${product.productResult+'瓶'}">productResult</td>
+            <td>
+                <a th:href="@{'/products/doadd?productId='+${product.productId}}" th:if="${product.productResult}!=0">添加到购物车</a>
+                <a th:if="${product.productResult}==0">该商品已经断货</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

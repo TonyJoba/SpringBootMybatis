@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="utf-8" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>Following is the details of a shopcart<a href="/products/getallproducts">返回商品列表</a></div>
+<table>
+    <tr>
+        <th>订单id</th>
+        <th>订单号</th>
+        <th>订单商品</th>
+        <th>订单总价</th>
+    </tr>
+    <tr th:each="order: ${ordersList}">
+        <td th:text="${order.orderId}">orderId</td>
+        <td th:text="${order.orderNum}">orderNum</td>
+        <td th:text="${order.productsName}">productsName</td>
+        <td th:text="${order.productsPrice+'元'}">productsPrice</td>
+    </tr>
+</table>
+
+</body>
+</html>

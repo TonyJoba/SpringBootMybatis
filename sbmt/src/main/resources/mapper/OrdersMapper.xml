@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.it.sbmt.dao.OrdersMapper">
+
+    <sql id="BASE_TABLE">
+        `shoppingdemo`.`t_orders`
+    </sql>
+
+    <sql id="BASE_COLUMN">
+        `orderNum`,
+        `orderDetails`
+    </sql>
+
+    <insert id="doadd" parameterType="orders">
+        INSERT INTO
+          <include refid="BASE_TABLE"></include>
+          (
+          <include refid="BASE_COLUMN"></include>
+          )
+        VALUES
+          (
+            #{orderNum},
+            #{orderDetails}
+          );
+    </insert>
+
+    <select id="doselect" resultType="orders">
+    SELECT
+      `orderId`,
+      `orderNum`,
+      `orderDetails`,
+      (SELECT productName FROM t_products WHERE productId = orderDetails) AS `productsName`,
+      (SELECT productPrice FROM t_products WHERE productId = orderDetails) AS `productsPrice`
+    FROM
+      `shoppingdemo`.`t_orders`
+    </select>
+
+
+
+
+</mapper>

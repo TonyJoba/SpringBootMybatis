@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.it.sbmt.dao.ProductsMapper">
+
+    <sql id="BASE_TABLE">
+         `shoppingdemo`.`t_products`
+    </sql>
+
+    <sql id="BASE_COLUMN">
+      `productId`,
+      `productName`,
+      `productDesc`,
+      `productPrice`,
+      `productResult`,
+      `productImgUrl`
+    </sql>
+
+    <select id="getAllProducts" resultType="products">
+        SELECT
+          <include refid="BASE_COLUMN"></include>
+        FROM
+          <include refid="BASE_TABLE"></include>
+    </select>
+
+
+
+    <update id="updateDeleteCounts" parameterType="Integer">
+        UPDATE
+          `shoppingdemo`.`t_products`
+        SET
+          `productResult` = productResult-1
+        WHERE `productId` = #{productsId};
+    </update>
+
+</mapper>
